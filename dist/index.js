@@ -37,6 +37,7 @@ var createNewBlock = function (data) {
     var newTimeStamp = getNewTimeStamp();
     var newHash = Block.calculateBlockHash(newIndex, previousBlock.hash, data, newTimeStamp);
     var newBlock = new Block(newIndex, newHash, previousBlock.hash, data, newTimeStamp);
+    addBlock(newBlock);
     return newBlock;
 };
 var getHashForBlock = function (aBlock) {
@@ -58,5 +59,8 @@ var addBlock = function (candidateBlock) {
         blockChain.push(candidateBlock);
     }
 };
-console.log(createNewBlock("hi"));
+createNewBlock("second");
+createNewBlock("third");
+createNewBlock("four");
+console.log(blockChain);
 //# sourceMappingURL=index.js.map

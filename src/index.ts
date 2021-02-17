@@ -69,6 +69,7 @@ const createNewBlock = (data: string): Block => {
     data,
     newTimeStamp
   );
+  addBlock(newBlock);
   return newBlock;
 };
 const getHashForBlock = (aBlock:Block):string => {
@@ -95,6 +96,10 @@ const addBlock = (candidateBlock:Block) =>{
     blockChain.push(candidateBlock);
   }
 }; 
-console.log(createNewBlock("hi"));
+
+createNewBlock("second");
+createNewBlock("third");
+createNewBlock("four");
+console.log(blockChain);
 
 export {};
