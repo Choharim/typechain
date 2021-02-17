@@ -1,10 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var name = "mori";
-var gender = "female";
-var age = 8;
-var sayHi = function (name, gender, age) {
-    console.log("hello, my name is " + name + ", i am a " + gender + " and i am " + age + "!!!!.");
+var Human = /** @class */ (function () {
+    function Human(name, age, gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+    return Human;
+}());
+var person = new Human("mori", 8);
+var sayHi = function (obj) {
+    console.log("hello, my name is " + obj.name + ", i am a " + obj.age + " and i am " + obj.gender);
 };
-sayHi(name, gender, age);
+sayHi(person);
 //# sourceMappingURL=index.js.map

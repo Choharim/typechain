@@ -1,9 +1,19 @@
-const name:string = "mori";
-const gender:string = "female";
-const age:number = 8;
+class Human {
+  public name:string;
+  public age:number;
+  public gender:string;
+  constructor(name:string,age:number,gender?:string){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+  }
+}
 
-const sayHi = (name:string,gender:string,age:number) => {
-  console.log(`hello, my name is ${name}, i am a ${gender} and i am ${age}!!!!.`);
+const person = new Human("mori",8);
+
+const sayHi = (obj:Human) => {
+  console.log(`hello, my name is ${obj.name}, i am a ${obj.age} and i am ${obj.gender}`);
 };
-sayHi(name,gender,age);
+
+sayHi(person);
 export {};
