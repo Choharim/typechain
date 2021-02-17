@@ -12,6 +12,18 @@ var Block = /** @class */ (function () {
     Block.calculateBlockHash = function (index, previousHash, data, timestamp) {
         return CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
     };
+    Block.validateStructure = function (aBlock) {
+        if (typeof aBlock.index === "number" &&
+            typeof aBlock.hash === "string" &&
+            typeof aBlock.previousHash === "string" &&
+            typeof aBlock.data === "string" &&
+            typeof aBlock.timestamp === "number") {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
     return Block;
 }());
 var genesisBlock = new Block(1, "20210217", "", "hello", 123456);
@@ -25,8 +37,26 @@ var createNewBlock = function (data) {
     var newTimeStamp = getNewTimeStamp();
     var newHash = Block.calculateBlockHash(newIndex, previousBlock.hash, data, newTimeStamp);
     var newBlock = new Block(newIndex, newHash, previousBlock.hash, data, newTimeStamp);
-    blockChain.push(newBlock);
-    return getBlockChain();
+    return newBlock;
 };
-console.log(createNewBlock("hahaha"), createNewBlock("good"));
+var getHashForBlock = function (aBlock) {
+    return Block.calculateBlockHash(aBlock.index, aBlock.previousHash, aBlock.data, aBlock.timestamp);
+};
+var isBlockValidation = function (candidateBlock, previousBlock) {
+    if (Block.validateStructure(candidateBlock) &&
+        candidateBlock.index === previousBlock.index + 1 &&
+        candidateBlock.previousHash === previousBlock.hash &&
+        candidateBlock.hash === getHashForBlock(candidateBlock)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+};
+var addBlock = function (candidateBlock) {
+    if (isBlockValidation(candidateBlock, getLatestBlock())) {
+        blockChain.push(candidateBlock);
+    }
+};
+console.log(createNewBlock("hi"));
 //# sourceMappingURL=index.js.map
